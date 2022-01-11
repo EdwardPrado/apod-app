@@ -1,0 +1,48 @@
+//Utilities
+@import "../../assets/utilities/namedVariables.scss";
+@import "../../assets/utilities/global.scss";
+
+.space {
+	&-card {
+		margin: 4rem auto;
+		margin-top: 0;
+		max-width: 400px;
+		background-color: $primary;
+		border: 1px solid #b7b7a4;
+		color: $secondary;
+
+		img {
+			max-width: 100%;
+		}
+
+		&_content {
+			padding: $spacingSmall;
+
+			h3 {
+				margin: 0;
+				margin-bottom: $spacingExtraSmall;
+			}
+
+			span {
+				font-size: 14px;
+			}
+
+			p {
+				margin-top: $spacingExtraSmall;
+			}
+		}
+	}
+}
+
+.icon,
+.icon_like,
+.icon_like_fill {
+	cursor: pointer;
+	margin-right: 12px;
+}
+
+.icon_like {
+	&_fill {
+		color: #ff4c4c;
+	}
+}
