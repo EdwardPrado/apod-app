@@ -1,0 +1,39 @@
+//Mixins
+@mixin maxSize {
+	max-width: $maxWidth;
+	padding: $spacingSmall;
+}
+
+body {
+	background-color: $duodenary;
+}
+
+.card-container {
+	@include maxSize;
+
+	margin: $spacingMedium auto;
+	padding-top: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.loading_backdrop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+.loading_error {
+	text-align: center;
+	color: $primary;
+}
+
+.btn_load-more {
+	margin: 0 auto;
+	max-width: 200px;
+	background-color: $tertiary !important;
+}
