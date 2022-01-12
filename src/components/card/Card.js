@@ -104,7 +104,7 @@ const Card = (props) => {
 				open={snackbarOpen}
 				autoHideDuration={4000}
 				onClose={handleSnackbarClose}
-				message={`Copied ${props.title} ${props.mediaType}`}
+				message={`Copied ${props.title} ${props.mediaType} link`}
 				action={action}
 			/>
 		</div>
