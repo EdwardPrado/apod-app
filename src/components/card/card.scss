@@ -7,9 +7,9 @@
 		margin: 4rem auto;
 		margin-top: 0;
 		max-width: 400px;
-		background-color: $primary;
+		background-color: var(--primary);
 		border: 1px solid #b7b7a4;
-		color: $secondary;
+		color: var(--secondary);
 
 		img {
 			max-width: 100%;
