@@ -5,7 +5,7 @@
 }
 
 body {
-	background-color: $duodenary;
+	background-color: var(--duodenary);
 }
 
 .card-container {
@@ -20,11 +20,11 @@ body {
 
 .loading_error {
 	text-align: center;
-	color: $primary;
+	color: var(--primary);
 }
 
 .btn_load-more {
 	margin: 0 auto;
 	max-width: 200px;
-	background-color: $tertiary !important;
+	background-color: var(--tertiary) !important;
 }
