@@ -14,7 +14,7 @@ const Likes = () => {
 	useEffect(() => {
 		let storage = JSON.parse(localStorage.getItem("nasa-apod_storage"));
 
-		if (storage.length !== 0) {
+		if (storage !== null && storage.length !== 0) {
 			let cardArr = [];
 
 			for (let i = 0; i < storage.length; i++) {
@@ -34,6 +34,8 @@ const Likes = () => {
 			//Reverse the array so that the most recent entry is first
 			setCards(cardArr.reverse());
 		} else {
+			setCards([<h3>Like a post to see it here</h3>]);
+			setIsLoading(false);
 		}
 	}, []);
 
