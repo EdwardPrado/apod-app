@@ -7,10 +7,13 @@ import SendIcon from "@mui/icons-material/Send";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 const Card = (props) => {
 	const [like, setLike] = useState(false);
-	const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+	const [snackbarOpen, setSnackbarOpen] = useState(false);
+	const [isEllipsis, setIsEllipsis] = useState(true);
 
 	const handleLikeClick = (bool, cardObject) => {
 		setLike(bool);
@@ -47,20 +50,25 @@ const Card = (props) => {
 		setSnackbarOpen(false);
 	};
 
-	//Only runs on initial render
+	const handleMoreExplanation = () => {
+		setIsEllipsis(false);
+	};
+
 	useEffect(() => {
-		if (props.date !== null) {
+		setLike(props.isLiked);
+
+		if (props.date !== null && props.isLiked !== true) {
 			let storage = [];
 
 			if (localStorage.getItem("nasa-apod_storage") !== null) {
-				storage = JSON.parse(localStorage.getItem("nasa-apod_storage")) || [];
-			}
+				storage = JSON.parse(localStorage.getItem("nasa-apod_storage"));
 
-			if (storage.some((entry) => entry.date === props.date)) {
-				setLike(true);
+				if (storage.some((entry) => entry.date === props.date)) {
+					setLike(true);
+				}
 			}
 		}
-	}, []);
+	});
 
 	const action = (
 		<React.Fragment>
@@ -71,7 +79,11 @@ const Card = (props) => {
 	);
 
 	return (
-		<div className="space-card" key={props.date}>
+		<article className="space-card" key={props.date}>
+			<div className="space-card_content">
+				<span>{props.date}</span>
+				<h3>{props.title}</h3>
+			</div>
 			{props.mediaType === "video" ? (
 				<iframe
 					width="100%"
@@ -83,18 +95,21 @@ const Card = (props) => {
 					allowFullScreen
 				></iframe>
 			) : props.mediaType === "image" ? (
-				<img src={props.mediaURL} alt={props.title + " photo."}></img>
+				<img src={props.mediaURL} alt={props.title + " photo."} loading="lazy"></img>
 			) : null}
 			<div className="space-card_content">
-				<span>{props.date}</span>
-				<h3>{props.title}</h3>
-				<p>{props.explanation}</p>
 				{like ? (
 					<FavoriteIcon className="icon_like_fill" onClick={() => handleLikeClick(false, props)} />
 				) : (
 					<FavoriteBorderIcon className="icon_like" onClick={() => handleLikeClick(true, props)} />
 				)}
 				<SendIcon className="icon" onClick={() => handleShareClick(props.mediaURL)} />
+				<Typography noWrap={isEllipsis}>{props.explanation}</Typography>
+				{isEllipsis ? (
+					<Button variant="outlined" onClick={() => handleMoreExplanation()}>
+						Show More
+					</Button>
+				) : null}
 			</div>
 			<Snackbar
 				anchorOrigin={{
@@ -107,7 +122,7 @@ const Card = (props) => {
 				message={`Copied ${props.title} ${props.mediaType} link`}
 				action={action}
 			/>
-		</div>
+		</article>
 	);
 };
 

@@ -6,7 +6,7 @@
 	&-card {
 		margin: 4rem auto;
 		margin-top: 0;
-		max-width: 400px;
+		max-width: 100%;
 		background-color: var(--primary);
 		border: 1px solid #b7b7a4;
 		color: var(--secondary);
@@ -16,7 +16,8 @@
 		}
 
 		&_content {
-			padding: $spacingSmall;
+			padding: $spacingExtraSmall $spacingSmall;
+			padding-bottom: 0;
 
 			h3 {
 				margin: 0;
@@ -30,6 +31,20 @@
 			p {
 				margin-top: $spacingExtraSmall;
 			}
+
+			button {
+				margin-top: $spacingExtraSmall;
+				color: var(--secondary);
+				border-color: #b7b7a4;
+
+				&:hover {
+					border-color: #b7b7a4;
+				}
+			}
+		}
+
+		&_content:nth-of-type(2) {
+			padding-bottom: $spacingSmall;
 		}
 	}
 }

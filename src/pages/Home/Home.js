@@ -24,11 +24,11 @@ const Home = () => {
 		setIsError(false);
 		setIsLoading(true);
 
-		let startDate = new Date();
+		let startDate = new Date(endDate);
 		var parsedEndDate = new Date(endDate);
 
-		//Subtract 7 to set the start day back by 7 days before the end date
-		startDate.setDate(parsedEndDate.getDate() - 7);
+		//Subtract 6 to set the start day back by 6 days before the end date
+		startDate.setDate(startDate.getDate() - 6);
 
 		axios({
 			method: "GET",
@@ -48,10 +48,18 @@ const Home = () => {
 					cardArr = [cards];
 				}
 
-				// let newCardArr = [];
-
 				for (let i = 0; i < res.length; i++) {
-					// newCardArr.push(
+					let storage = [];
+					let isLiked = false;
+
+					if (localStorage.getItem("nasa-apod_storage") !== null) {
+						storage = JSON.parse(localStorage.getItem("nasa-apod_storage"));
+					}
+
+					if (storage.some((entry) => entry.date === res[i].date)) {
+						isLiked = true;
+					}
+
 					cardArr.push(
 						<Card
 							title={res[i].title}
@@ -59,6 +67,7 @@ const Home = () => {
 							explanation={res[i].explanation}
 							mediaType={res[i].media_type}
 							mediaURL={res[i].url}
+							isLiked={isLiked}
 						/>
 					);
 				}
