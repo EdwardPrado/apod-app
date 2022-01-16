@@ -44,10 +44,6 @@ const Home = () => {
 				let cardArr = cards === 0 ? [] : cards;
 
 				for (const card of data) {
-					const storage = JSON.parse(localStorage.getItem("nasa-apod_storage"))
-						? JSON.parse(localStorage.getItem("nasa-apod_storage"))
-						: [];
-					let isLiked = storage?.some((entry) => entry.date === card.date) ? true : false;
 					cardArr.push(card);
 				}
 
