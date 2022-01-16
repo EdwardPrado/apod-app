@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./date.scss";
 
-import Navbar from "../../components/Navbar/Navbar";
-
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
@@ -24,7 +22,7 @@ const Date = () => {
 			method: "GET",
 			url: "https://api.nasa.gov/planetary/apod",
 			params: {
-				api_key: "mLDDGsKxXZXy6pvJuGI7Adk5xHK1zczZ5vkRKIhj",
+				api_key: "",
 				date: date,
 				thumbs: true,
 			},
@@ -60,7 +58,6 @@ const Date = () => {
 
 	return (
 		<div>
-			<Navbar />
 			{isLoading ? (
 				<Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isLoading}>
 					<CircularProgress />
