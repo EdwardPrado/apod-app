@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./home.scss";
 
-import Navbar from "../../components/Navbar/Navbar";
 import Card from "../../components/card/Card";
 
 import axios from "axios";
@@ -14,13 +13,13 @@ const Home = () => {
 	const [isError, setIsError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [cards, setCards] = useState([]);
-	const [endDate, setEndDate] = useState(Date);
+	const [endDate, setEndDate] = useState(new Date());
 
 	const handleLoadMore = () => {
-		callAPI();
+		getLastSevenPODs();
 	};
 
-	const callAPI = () => {
+	const getLastSevenPODs = () => {
 		setIsError(false);
 		setIsLoading(true);
 
@@ -34,48 +33,30 @@ const Home = () => {
 			method: "GET",
 			url: "https://api.nasa.gov/planetary/apod",
 			params: {
-				api_key: "mLDDGsKxXZXy6pvJuGI7Adk5xHK1zczZ5vkRKIhj",
+				api_key: "",
 				start_date: startDate.toISOString().split("T")[0],
 				end_date: parsedEndDate.toISOString().split("T")[0],
+				thumbs: true,
 			},
 		})
 			.then((response) => {
 				//Reverse the array so it's in chronological order
-				let res = response.data.reverse();
-				let cardArr = [];
+				const data = response.data.reverse();
+				let cardArr = cards === 0 ? [] : cards;
 
-				if (cards.length !== 0) {
-					cardArr = [cards];
+				for (const card of data) {
+					const storage = JSON.parse(localStorage.getItem("nasa-apod_storage"))
+						? JSON.parse(localStorage.getItem("nasa-apod_storage"))
+						: [];
+					let isLiked = storage?.some((entry) => entry.date === card.date) ? true : false;
+					cardArr.push(card);
 				}
-
-				for (let i = 0; i < res.length; i++) {
-					let storage = [];
-					let isLiked = false;
-
-					if (localStorage.getItem("nasa-apod_storage") !== null) {
-						storage = JSON.parse(localStorage.getItem("nasa-apod_storage"));
-					}
-
-					if (storage.some((entry) => entry.date === res[i].date)) {
-						isLiked = true;
-					}
-
-					cardArr.push(
-						<Card
-							title={res[i].title}
-							date={res[i].date}
-							explanation={res[i].explanation}
-							mediaType={res[i].media_type}
-							mediaURL={res[i].url}
-							isLiked={isLiked}
-						/>
-					);
-				}
-
-				startDate.setDate(startDate.getDate() - 1);
-				setEndDate(startDate);
 
 				setCards(cardArr);
+
+				//Subtract 1 or else the next call will include the last day
+				startDate.setDate(startDate.getDate() - 1);
+				setEndDate(startDate);
 
 				setIsLoading(false);
 			})
@@ -101,27 +82,26 @@ const Home = () => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		callAPI();
+		getLastSevenPODs();
 	}, []);
 
 	return (
-		<div>
-			<Navbar />
-			<div className="card-container">
-				{cards}
-				{isError ? <h3 className="loading_error">{errorMessage}</h3> : null}
-				{isLoading ? (
-					<Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isLoading}>
-						<CircularProgress />
-					</Backdrop>
-				) : isError ? null : (
-					<span onClick={() => handleLoadMore()}>
-						<Button className="btn_load-more" variant="contained">
-							Load More
-						</Button>
-					</span>
-				)}
-			</div>
+		<div className="card-container">
+			{cards.map((card) => (
+				<Card key={card.date} {...card} />
+			))}
+			{isError ? <h3 className="loading_error">{errorMessage}</h3> : null}
+			{isLoading ? (
+				<Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={isLoading}>
+					<CircularProgress />
+				</Backdrop>
+			) : isError ? null : (
+				<span onClick={() => handleLoadMore()}>
+					<Button className="btn_load-more" variant="contained">
+						Load More
+					</Button>
+				</span>
+			)}
 		</div>
 	);
 };

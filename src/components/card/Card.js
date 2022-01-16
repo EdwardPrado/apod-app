@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./card.scss";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -12,15 +12,19 @@ import Button from "@mui/material/Button";
 
 const Card = (props) => {
 	const [like, setLike] = useState(false);
+	const savedLike = useRef(props.like !== undefined ? props.like : false);
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [isEllipsis, setIsEllipsis] = useState(true);
 
-	const handleLikeClick = (bool, cardObject) => {
+	//Pass in boolean since setting the like hook
+	//to the opposite of its current value doesn't
+	//update the hook properly.
+	const handleLikeClick = (bool) => {
 		setLike(bool);
-		handleLikeStorageUpdate(bool, cardObject);
+		handleLikeStorageUpdate(bool);
 	};
 
-	const handleLikeStorageUpdate = (bool, cardObject) => {
+	const handleLikeStorageUpdate = (bool) => {
 		let storage = [];
 
 		if (localStorage.getItem("nasa-apod_storage") !== null) {
@@ -28,7 +32,7 @@ const Card = (props) => {
 		}
 
 		if (bool) {
-			storage.push(cardObject);
+			storage.push(props);
 		} else {
 			let newStorage = storage.filter((entry) => entry.date !== props.date);
 			storage = newStorage;
@@ -42,7 +46,7 @@ const Card = (props) => {
 		setSnackbarOpen(true);
 	};
 
-	const handleSnackbarClose = (event, reason) => {
+	const handleSnackbarClose = (reason) => {
 		if (reason === "clickaway") {
 			return;
 		}
@@ -55,9 +59,7 @@ const Card = (props) => {
 	};
 
 	useEffect(() => {
-		setLike(props.isLiked);
-
-		if (props.date !== null && props.isLiked !== true) {
+		if (props.date !== null) {
 			let storage = [];
 
 			if (localStorage.getItem("nasa-apod_storage") !== null) {
@@ -79,31 +81,31 @@ const Card = (props) => {
 	);
 
 	return (
-		<article className="space-card" key={props.date}>
+		<article className="space-card">
 			<div className="space-card_content">
 				<span>{props.date}</span>
 				<h3>{props.title}</h3>
 			</div>
-			{props.mediaType === "video" ? (
+			{props.media_type === "video" ? (
 				<iframe
 					width="100%"
 					height="315"
-					src={props.mediaURL}
+					src={props.url}
 					title="YouTube video player"
 					frameBorder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowFullScreen
 				></iframe>
-			) : props.mediaType === "image" ? (
-				<img src={props.mediaURL} alt={props.title + " photo."} loading="lazy"></img>
+			) : props.media_type === "image" ? (
+				<img src={props.url} alt={props.title + " photo."} loading="lazy"></img>
 			) : null}
 			<div className="space-card_content">
 				{like ? (
-					<FavoriteIcon className="icon_like_fill" onClick={() => handleLikeClick(false, props)} />
+					<FavoriteIcon className="icon_like_fill" onClick={() => handleLikeClick(false)} />
 				) : (
-					<FavoriteBorderIcon className="icon_like" onClick={() => handleLikeClick(true, props)} />
+					<FavoriteBorderIcon className="icon_like" onClick={() => handleLikeClick(true)} />
 				)}
-				<SendIcon className="icon" onClick={() => handleShareClick(props.mediaURL)} />
+				<SendIcon className="icon" onClick={() => handleShareClick(props.url)} />
 				<Typography noWrap={isEllipsis}>{props.explanation}</Typography>
 				{isEllipsis ? (
 					<Button variant="outlined" onClick={() => handleMoreExplanation()}>
@@ -119,7 +121,7 @@ const Card = (props) => {
 				open={snackbarOpen}
 				autoHideDuration={4000}
 				onClose={handleSnackbarClose}
-				message={`Copied ${props.title} ${props.mediaType} link`}
+				message={`Copied ${props.title} ${props.media_type} link`}
 				action={action}
 			/>
 		</article>
