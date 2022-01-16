@@ -151,10 +151,8 @@ const Navbar = () => {
 							}}
 						>
 							{pages.map((page) => (
-								<Link href={page.url}>
-									<MenuItem key={page.name} onClick={handleCloseNavMenu}>
-										{page.name}
-									</MenuItem>
+								<Link href={page.url} key={page.name}>
+									<MenuItem onClick={handleCloseNavMenu}>{page.name}</MenuItem>
 								</Link>
 							))}
 
@@ -179,12 +177,9 @@ const Navbar = () => {
 									color: "#fff",
 									textDecoration: "none",
 								}}
+								key={page.name}
 							>
-								<Button
-									key={page.name}
-									onClick={handleCloseNavMenu}
-									sx={{ my: 2, color: "white", textDecoration: "none" }}
-								>
+								<Button onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", textDecoration: "none" }}>
 									{page.name}
 								</Button>
 							</Link>
