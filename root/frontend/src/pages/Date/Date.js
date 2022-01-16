@@ -20,9 +20,8 @@ const Date = () => {
 
 		axios({
 			method: "GET",
-			url: "https://api.nasa.gov/planetary/apod",
+			url: "/apod",
 			params: {
-				api_key: "",
 				date: date,
 				thumbs: true,
 			},

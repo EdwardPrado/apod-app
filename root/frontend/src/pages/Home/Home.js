@@ -31,9 +31,8 @@ const Home = () => {
 
 		axios({
 			method: "GET",
-			url: "https://api.nasa.gov/planetary/apod",
+			url: "/apod",
 			params: {
-				api_key: "",
 				start_date: startDate.toISOString().split("T")[0],
 				end_date: parsedEndDate.toISOString().split("T")[0],
 				thumbs: true,
