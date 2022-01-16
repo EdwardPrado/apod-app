@@ -5,11 +5,20 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import SendIcon from "@mui/icons-material/Send";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+
 const Date = () => {
 	const [isError, setIsError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
 	const [dateData, setDateData] = useState({});
+	const [like, setLike] = useState(false);
+	const [snackbarOpen, setSnackbarOpen] = useState(false);
 
 	const callAPI = () => {
 		setIsError(false);
@@ -50,8 +59,62 @@ const Date = () => {
 			});
 	};
 
+	const handleLikeClick = (bool) => {
+		setLike(bool);
+		handleLikeStorageUpdate(bool);
+	};
+
+	const handleLikeStorageUpdate = (bool) => {
+		let storage = [];
+
+		if (localStorage.getItem("nasa-apod_storage") !== null) {
+			storage = JSON.parse(localStorage.getItem("nasa-apod_storage")) || [];
+		}
+
+		if (bool) {
+			storage.push(dateData);
+		} else {
+			let newStorage = storage.filter((entry) => entry.date !== dateData.date);
+			storage = newStorage;
+		}
+
+		localStorage.setItem("nasa-apod_storage", JSON.stringify(storage));
+	};
+
+	const handleShareClick = (url) => {
+		navigator.clipboard.writeText(`${window.location}`);
+		setSnackbarOpen(true);
+	};
+
+	const handleSnackbarClose = (reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+
+		setSnackbarOpen(false);
+	};
+
+	const action = (
+		<React.Fragment>
+			<IconButton size="small" aria-label="close" color="inherit" onClick={handleSnackbarClose}>
+				<CloseIcon fontSize="small" />
+			</IconButton>
+		</React.Fragment>
+	);
+
 	useEffect(() => {
 		setIsLoading(true);
+
+		let storage = [];
+
+		if (localStorage.getItem("nasa-apod_storage") !== null) {
+			storage = JSON.parse(localStorage.getItem("nasa-apod_storage"));
+
+			if (storage.some((entry) => entry.date === dateData.date)) {
+				setLike(true);
+			}
+		}
+
 		callAPI();
 	}, []);
 
@@ -86,10 +149,27 @@ const Date = () => {
 					<div className="date-post_content">
 						<span>{dateData.date}</span>
 						<h1>{dateData.title}</h1>
+						{like ? (
+							<FavoriteIcon className="icon_like_fill" onClick={() => handleLikeClick(false)} />
+						) : (
+							<FavoriteBorderIcon className="icon_like" onClick={() => handleLikeClick(true)} />
+						)}
+						<SendIcon className="icon" onClick={() => handleShareClick(dateData.url)} />
 						<p>{dateData.explanation}</p>
 					</div>
 				</article>
 			)}
+			<Snackbar
+				anchorOrigin={{
+					vertical: "bottom",
+					horizontal: "center",
+				}}
+				open={snackbarOpen}
+				autoHideDuration={4000}
+				onClose={handleSnackbarClose}
+				message={"Copied post link"}
+				action={action}
+			/>
 		</div>
 	);
 };
