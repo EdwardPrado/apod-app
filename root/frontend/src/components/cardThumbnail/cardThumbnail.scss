@@ -5,6 +5,9 @@
 .card-thumbnail {
 	&_wrapper {
 		position: relative;
+		height: 320px;
+		width: 320px;
+		background-color: #000; //fallback
 
 		img {
 			object-fit: cover;
@@ -16,7 +19,7 @@
 			position: absolute;
 			left: 0;
 			right: 0;
-			bottom: 3px;
+			bottom: 0;
 			padding: $spacingExtraSmall $spacingSmall;
 			text-align: left;
 			color: var(--secondary);
@@ -42,6 +45,9 @@
 @media (max-width: $break_lg) {
 	.card-thumbnail {
 		&_wrapper {
+			height: 200px;
+			width: 200px;
+
 			img {
 				height: 200px;
 				width: 200px;
@@ -53,6 +59,9 @@
 @media (max-width: $break_md) {
 	.card-thumbnail {
 		&_wrapper {
+			height: 250px;
+			width: 250px;
+
 			img {
 				height: 250px;
 				width: 250px;
