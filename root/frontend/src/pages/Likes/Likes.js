@@ -17,16 +17,14 @@ const Likes = () => {
 			let cardArr = [];
 
 			for (let i = 0; i < storage.length; i++) {
-				cardArr.push(
-					<CardThumbnail
-						title={storage[i].title}
-						date={storage[i].date}
-						explanation={storage[i].explanation}
-						mediaType={storage[i].mediaType}
-						mediaURL={storage[i].mediaURL}
-						thumbnailURL={storage[i].thumbnail_url}
-					/>
-				);
+				cardArr.push({
+					title: storage[i].title,
+					date: storage[i].date,
+					explanation: storage[i].explanation,
+					media_type: storage[i].media_type,
+					media_url: storage[i].url,
+					thumbnail_url: storage[i].thumbnail_url,
+				});
 			}
 
 			setIsLoading(false);
@@ -59,7 +57,9 @@ const Likes = () => {
 						<CircularProgress />
 					</Box>
 				) : null}
-				{cards}
+				{cards.map((card) => (
+					<CardThumbnail key={card.date} {...card} />
+				))}
 			</div>
 		</div>
 	);

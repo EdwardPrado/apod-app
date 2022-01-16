@@ -7,10 +7,10 @@ const CardThumbnail = (props) => {
 	return (
 		<Link to={{ pathname: "/post", search: `?date=${props.date}` }}>
 			<div className="card-thumbnail_wrapper">
-				{props.mediaType === "video" ? (
-					<img src={props.thumbnailURL} alt={`${props.title}.`} />
+				{props.media_type === "video" ? (
+					<img src={props.thumbnail_url} alt={`${props.title}.`} />
 				) : (
-					<img src={props.mediaURL} alt={`${props.title}.`} />
+					<img src={props.media_url} alt={`${props.title}.`} />
 				)}
 				<article>
 					<span>{props.date}</span>
