@@ -101,15 +101,25 @@ const Navbar = () => {
 	useEffect(() => {
 		let body = document.getElementsByTagName("body");
 
-		if (localStorage.getItem("nasa-apod_theme") === null) {
-			setThemeSwitch(false);
-			body[0].setAttribute("data-theme", "light");
-		} else if (localStorage.getItem("nasa-apod_theme") === "dark") {
+		if (
+			window.matchMedia &&
+			window.matchMedia("(prefers-color-scheme: dark)").matches &&
+			localStorage.getItem("nasa-apod_theme") === null
+		) {
 			setThemeSwitch(true);
+			localStorage.setItem("nasa-apod_theme", "dark");
 			body[0].setAttribute("data-theme", "dark");
 		} else {
-			setThemeSwitch(false);
-			body[0].setAttribute("data-theme", "light");
+			if (localStorage.getItem("nasa-apod_theme") === null) {
+				setThemeSwitch(false);
+				body[0].setAttribute("data-theme", "light");
+			} else if (localStorage.getItem("nasa-apod_theme") === "dark") {
+				setThemeSwitch(true);
+				body[0].setAttribute("data-theme", "dark");
+			} else {
+				setThemeSwitch(false);
+				body[0].setAttribute("data-theme", "light");
+			}
 		}
 	}, []);
 
