@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./card.scss";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -12,7 +12,6 @@ import Button from "@mui/material/Button";
 
 const Card = (props) => {
 	const [like, setLike] = useState(false);
-	const savedLike = useRef(props.like !== undefined ? props.like : false);
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [isEllipsis, setIsEllipsis] = useState(true);
 
@@ -42,7 +41,7 @@ const Card = (props) => {
 	};
 
 	const handleShareClick = (url) => {
-		navigator.clipboard.writeText(url);
+		navigator.clipboard.writeText(`${window.location}post?date=${props.date}`);
 		setSnackbarOpen(true);
 	};
 
@@ -121,7 +120,7 @@ const Card = (props) => {
 				open={snackbarOpen}
 				autoHideDuration={4000}
 				onClose={handleSnackbarClose}
-				message={`Copied ${props.title} ${props.media_type} link`}
+				message={"Copied post link"}
 				action={action}
 			/>
 		</article>
