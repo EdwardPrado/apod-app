@@ -38,6 +38,15 @@ const Date = () => {
 			.then((response) => {
 				setIsLoading(false);
 				setDateData(response.data);
+
+				let storage = [];
+				if (localStorage.getItem("nasa-apod_storage") !== null) {
+					storage = JSON.parse(localStorage.getItem("nasa-apod_storage"));
+
+					if (storage.some((entry) => entry.date === response.data.date)) {
+						setLike(true);
+					}
+				}
 			})
 			.catch(function (error) {
 				if (error.response) {
@@ -104,16 +113,6 @@ const Date = () => {
 
 	useEffect(() => {
 		setIsLoading(true);
-
-		let storage = [];
-
-		if (localStorage.getItem("nasa-apod_storage") !== null) {
-			storage = JSON.parse(localStorage.getItem("nasa-apod_storage"));
-
-			if (storage.some((entry) => entry.date === dateData.date)) {
-				setLike(true);
-			}
-		}
 
 		callAPI();
 	}, []);
