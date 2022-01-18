@@ -39,3 +39,13 @@
 		}
 	}
 }
+
+//Media Queries
+@media (max-width: $break_sm) {
+	.date-post {
+		&_container {
+			padding: $spacingExtraSmall;
+			padding-top: 0;
+		}
+	}
+}
