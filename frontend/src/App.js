@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Likes from "./pages/Likes/Likes";
 import Date from "./pages/Date/Date";
+import Search from "./pages/Search/Search";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 						<Route exact path="/" element={<Home />} />
 						<Route exact path="/likes" element={<Likes />} />
 						<Route exact path="/post" element={<Date />} />
+						<Route exact path="/search" element={<Search />} />
 					</Routes>
 				</Router>
 			</main>
