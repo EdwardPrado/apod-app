@@ -10,7 +10,7 @@ const CardThumbnail = (props) => {
 				{props.media_type === "video" ? (
 					<img src={props.thumbnail_url} alt={`${props.title}.`} />
 				) : (
-					<img src={props.media_url} alt={`${props.title}.`} />
+					<img src={props.url} alt={`${props.title}.`} />
 				)}
 				<article>
 					<span>{props.date}</span>
