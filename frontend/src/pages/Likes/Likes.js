@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./likes.scss";
 
-import CardThumbnail from "../../components/cardThumbnail/CardThumbnail";
+import ThumbnailGrid from "../../components/ThumbnailGrid/ThumbnailGrid";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
@@ -22,7 +22,7 @@ const Likes = () => {
 					date: storage[i].date,
 					explanation: storage[i].explanation,
 					media_type: storage[i].media_type,
-					media_url: storage[i].url,
+					url: storage[i].url,
 					thumbnail_url: storage[i].thumbnail_url,
 				});
 			}
@@ -39,28 +39,24 @@ const Likes = () => {
 
 	return (
 		<div className="card-thumbnail_container">
-			<div className="card-thumbnail_grid">
-				{isLoading ? (
-					<Box
-						sx={{
-							top: 0,
-							left: 0,
-							bottom: 0,
-							right: 0,
-							position: "absolute",
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-						}}
-					>
-						<div className="loading_backdrop"></div>
-						<CircularProgress />
-					</Box>
-				) : null}
-				{cards.map((card) => (
-					<CardThumbnail key={card.date} {...card} />
-				))}
-			</div>
+			{isLoading ? (
+				<Box
+					sx={{
+						top: 0,
+						left: 0,
+						bottom: 0,
+						right: 0,
+						position: "absolute",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+					}}
+				>
+					<div className="loading_backdrop"></div>
+					<CircularProgress />
+				</Box>
+			) : null}
+			<ThumbnailGrid cards={cards} />
 		</div>
 	);
 };
