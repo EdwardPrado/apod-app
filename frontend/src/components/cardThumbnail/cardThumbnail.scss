@@ -2,24 +2,27 @@
 @import "../../assets/utilities/namedVariables.scss";
 @import "../../assets/utilities/global.scss";
 
+$wrapperSpacing: 12px;
+
 .card-thumbnail {
 	&_wrapper {
 		position: relative;
-		height: 320px;
-		width: 320px;
-		background-color: #000; //fallback
+		height: 100%;
+		width: 100%;
+		box-sizing: border-box;
+		padding: $wrapperSpacing;
 
 		img {
 			object-fit: cover;
-			height: 320px;
-			width: 320px;
+			height: 100%;
+			width: 100%;
 		}
 
 		article {
 			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: 0;
+			left: $wrapperSpacing;
+			right: $wrapperSpacing;
+			bottom: $wrapperSpacing;
 			padding: $spacingExtraSmall $spacingSmall;
 			text-align: left;
 			color: #fff;
@@ -43,20 +46,20 @@
 	}
 }
 
-//Media Queries
-@media (max-width: $break_lg) {
-	.card-thumbnail {
-		&_wrapper {
-			height: 200px;
-			width: 200px;
+// //Media Queries
+// @media (max-width: $break_lg) {
+// 	.card-thumbnail {
+// 		&_wrapper {
+// 			height: 200px;
+// 			width: 200px;
 
-			img {
-				height: 200px;
-				width: 200px;
-			}
-		}
-	}
-}
+// 			img {
+// 				height: 200px;
+// 				width: 200px;
+// 			}
+// 		}
+// 	}
+// }
 
 @media (max-width: $break_md) {
 	.card-thumbnail {

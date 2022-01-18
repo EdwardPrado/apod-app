@@ -29,3 +29,22 @@ body {
 	max-width: 200px;
 	background-color: var(--tertiary) !important;
 }
+
+.card-thumbnail_container {
+	@include maxSize;
+
+	margin: 0 auto;
+	text-align: center;
+
+	h1 {
+		color: var(--font);
+	}
+}
+
+// @media (max-width: $break_lg) {
+// 	.card-thumbnail {
+// 		&_container {
+// 			max-width: 600px;
+// 		}
+// 	}
+// }

@@ -22,6 +22,7 @@ import Switch from "@mui/material/Switch";
 const Navbar = () => {
 	const pages = [
 		{ name: "Home", url: "/" },
+		{ name: "Search", url: "/search" },
 		{ name: "Likes", url: "/likes" },
 	];
 

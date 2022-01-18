@@ -2,6 +2,9 @@
 @import "../../assets/utilities/namedVariables.scss";
 @import "../../assets/utilities/global.scss";
 
-h3 {
-	color: var(--font);
+.card-thumbnail {
+	&_grid {
+		overflow-x: visible;
+		margin: $spacingMedium 0;
+	}
 }
