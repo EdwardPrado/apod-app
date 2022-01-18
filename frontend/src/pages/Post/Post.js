@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./date.scss";
+import "./post.scss";
 
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -12,7 +12,7 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Date = () => {
+const Post = () => {
 	const [isError, setIsError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
@@ -173,4 +173,4 @@ const Date = () => {
 	);
 };
 
-export default Date;
+export default Post;
