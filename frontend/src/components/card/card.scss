@@ -9,7 +9,7 @@
 		max-width: 100%;
 		background-color: var(--primary);
 		border: 1px solid #b7b7a4;
-		color: var(--secondary);
+		color: var(--font);
 
 		img {
 			max-width: 100%;
@@ -34,7 +34,7 @@
 
 			button {
 				margin-top: $spacingExtraSmall;
-				color: var(--secondary);
+				color: var(--font);
 				border-color: #b7b7a4;
 
 				&:hover {
