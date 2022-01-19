@@ -166,6 +166,8 @@ const Search = () => {
 				</StyledFormControl>
 			</Box>
 
+			{isError ? <h3 className="loading_error">{errorMessage}</h3> : null}
+
 			<ThumbnailGrid cards={cards} />
 		</div>
 	);
