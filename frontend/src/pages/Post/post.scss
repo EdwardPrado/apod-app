@@ -1,0 +1,51 @@
+//Utilities
+@import "../../assets/utilities/namedVariables.scss";
+@import "../../assets/utilities/global.scss";
+
+.date-post {
+	&_container {
+		@include maxSize;
+
+		margin: $spacingLarge auto;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		color: var(--font);
+
+		.media-container {
+			max-width: 600px;
+			margin-bottom: $spacingLarge;
+
+			img {
+				max-width: 100%;
+			}
+
+			h5 {
+				margin: 0;
+				margin-top: $spacingExtraSmall;
+			}
+		}
+	}
+
+	&_content {
+		max-width: 500px;
+		padding: $spacingMedium;
+		padding-top: 0;
+
+		h1 {
+			margin: 0;
+			margin-bottom: $spacingSmall;
+		}
+	}
+}
+
+//Media Queries
+@media (max-width: $break_sm) {
+	.date-post {
+		&_container {
+			padding: $spacingExtraSmall;
+			padding-top: 0;
+		}
+	}
+}

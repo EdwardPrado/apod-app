@@ -1,0 +1,42 @@
+//Utilities
+@import "../../assets/utilities/namedVariables.scss";
+@import "../../assets/utilities/global.scss";
+
+.card-thumbnail {
+	&_container {
+		text-align: center;
+	}
+
+	&_grid {
+		display: inline-grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+		margin-top: $spacingMedium;
+		padding: $spacingSmall;
+	}
+}
+
+//Media Queries
+@media (max-width: $break_lg) {
+	.card-thumbnail {
+		&_grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+}
+
+@media (max-width: $break_md) {
+	.card-thumbnail {
+		&_grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+}
+
+@media (max-width: $break_sm) {
+	.card-thumbnail {
+		&_grid {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+}

@@ -1,0 +1,24 @@
+//Utilities
+@import "../../assets/utilities/namedVariables.scss";
+@import "../../assets/utilities/global.scss";
+
+.search-container {
+	&-wrapper {
+		@include maxSize;
+
+		margin: 0 auto;
+		color: var(--font);
+	}
+}
+
+.date-stack {
+	padding: 1rem;
+	background-color: var(--primary);
+	color: var(--font);
+
+	&_btn {
+		max-width: 200px;
+		margin: $spacingExtraSmall auto 0 auto !important;
+		background-color: var(--tertiary) !important;
+	}
+}
