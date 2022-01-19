@@ -9,7 +9,7 @@
 	"scripts": {
 		"backend": "cd backend && npm start",
 		"frontend": "cd frontend && npm start",
-		"start": "concurrently --kill-others-on-fail \"npm run backend\" \"npm run frontend\""
+		"start": "concurrently \"npm run backend\" \"npm run frontend\""
 	},
 	"engines": {
 		"node": "16.13.2"
