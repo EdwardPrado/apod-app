@@ -1,0 +1,9 @@
+{
+	"name": "shopify-challenge-monorepo",
+	"version": "1.0.0",
+	"license": "MIT",
+	"scripts": {
+		"build:backend": "npm --prefix backend run build",
+		"build:frontend": "npm --prefix frontend run build"
+	}
+}
