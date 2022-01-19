@@ -1,9 +1,22 @@
 {
-	"name": "shopify-challenge-monorepo",
+	"name": "shopify-intern-challenge",
 	"version": "1.0.0",
 	"license": "MIT",
+	"workspaces": [
+		"packages/*"
+	],
 	"scripts": {
-		"build:backend": "npm --prefix backend run build",
-		"build:frontend": "npm --prefix frontend run build"
+		"backend": "npm workspace shopify-intern-challenge/backend start",
+		"frontend": "npm workspace shopify-intern-challenge/frontend serve",
+		"build:backend": "npm workspace shopify-intern-challenge/backend",
+		"build:frontend": "npm workspace shopify-intern-challenge/frontend",
+		"start:backend": "npm workspace shopify-intern-challenge/backend start",
+		"start:frontend": "concurrently --kill-others-on-fail \"npm backend\" \"npm frontend\""
+	},
+	"engines": {
+		"node": "14.15.0"
+	},
+	"dependencies": {
+		"concurrently": "^7.0.0"
 	}
 }
