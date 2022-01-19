@@ -14,7 +14,7 @@
 		"start:frontend": "concurrently --kill-others-on-fail \"npm backend\" \"npm frontend\""
 	},
 	"engines": {
-		"node": "14.15.0"
+		"node": "16.13.2"
 	},
 	"dependencies": {
 		"concurrently": "^7.0.0"
