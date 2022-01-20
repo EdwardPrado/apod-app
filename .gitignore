@@ -211,3 +211,6 @@ dist
 .pnp.*
 
 build/
+
+# Local Netlify folder
+.netlify
