@@ -98,7 +98,7 @@ const Search = () => {
 
 		axios({
 			method: "GET",
-			url: "/apod",
+			url: "/.netlify/functions/get-apod",
 			params: {
 				...datePeriod,
 				thumbs: true,

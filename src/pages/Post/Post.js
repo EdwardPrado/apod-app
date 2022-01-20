@@ -29,7 +29,7 @@ const Post = () => {
 
 		axios({
 			method: "GET",
-			url: "/apod",
+			url: "/.netlify/functions/get-apod",
 			params: {
 				date: date,
 				thumbs: true,

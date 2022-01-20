@@ -4,12 +4,10 @@
 	"private": "true",
 	"license": "MIT",
 	"scripts": {
-		"serve:backend": "nodemon server.js --ignore client",
-		"serve:frontend": "react-scripts start",
-		"build:frontend": "react-scripts build",
-		"test:frontend": "react-scripts test",
-		"eject:frontend": "react-scripts eject",
-		"serve": "concurrently \"npm run serve:backend\" \"npm run serve:frontend\""
+		"serve": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
 	},
 	"engines": {
 		"node": "16.13.2"
@@ -30,10 +28,6 @@
 		"react-scripts": "5.0.0",
 		"sass": "^1.47.0",
 		"web-vitals": "^2.1.2"
-	},
-	"devDependencies": {
-		"concurrently": "^7.0.0",
-		"nodemon": "^2.0.15"
 	},
 	"eslintConfig": {
 		"extends": [
