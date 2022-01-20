@@ -1,4 +1,3 @@
-const { request } = require("express");
 const express = require("express");
 const app = express();
 const axios = require("axios");
@@ -21,4 +20,4 @@ app.get("/apod", async (req, res) => {
 	}
 });
 
-app.listen(5000);
+app.listen(process.env.BACKEND_SERVER_PORT || 5000);
