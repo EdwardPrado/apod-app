@@ -32,7 +32,7 @@ Live version is [here](https://ep-shopify-challenge.netlify.app/).
 1. Use `netlify dev` to launch locally
 
 # Production
-1. Import project from Git to Netlify
+1. Import project from Github to Netlify
 2. Under Environment variables add the following variables:
   - `API_KEY` with the API key
   - `BACKEND_SERVER_PORT` with the server port.  You can set it to 5000.
