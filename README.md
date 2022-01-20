@@ -2,7 +2,7 @@
 
 The purpose of this challenge was to build an app to help share photos from any of NASA's image APIs. I chose the [Astronomy Picture of the Day (APOD) API](https://github.com/nasa/apod-api) for my take on this challenge.
 
-Live version is [here](#).
+Live version is [here](https://ep-shopify-challenge.netlify.app/).
 
 # Features
 
@@ -19,25 +19,21 @@ Live version is [here](#).
   - Includes a light and dark theme you can choose from.
   - Selecting a theme stores your choice in the browser's local storage.
   - The App detects and sets the initial theme based on your device's preferred color scheme.
-- Hidden API Key
-  - Requests are rerouted to an Express Js backend through a proxy to prevent the user from accessing the API key.
 
 # Setup
 
 1. Download [NodeJs](https://nodejs.org/en/) if it's not already installed
-2. Navigate into both the frontend and backend folders and use `npm install`
-
-### Backend Folder
-
-1. Add a file called `.env` with `API_KEY = Key_Here` as its contents to the backend folder. Replace `Key_Here` with your NASA API key that can be gotten [here](https://github.com/nasa/apod-api).
+2. Download the [Netlify CLI](https://docs.netlify.com/cli/get-started/) if it's not already installed
+3. Use `npm install` in the root folder
+4. Add a `.env` file in the root folder with the contents `API_KEY=key_here` where `key_here` is a NASA API key which can be gotten [here](https://api.nasa.gov/).
 
 # Running the App
 
-1. Navigate into the backend folder and use `npm start` to start the backend.
-2. Navigate into the frontend folder and use `npm start` to start the frontend.
+1. Use `netlify dev` to launch locally
 
-# Dev Scripts
-
-### Backend
-
-1. Use `npm run devStart` in the backend folder to start the backend with [Nodemon](https://www.npmjs.com/package/nodemon). Nodemon will automatically restart the node application when file changes in the directory are detected.
+# Production
+1. Import project from Git to Netlify
+2. Under Environment variables add the following variables:
+  - `API_KEY` with the API key
+  - `BACKEND_SERVER_PORT` with the server port.  You can set it to 5000.
+  - `CI` and set it to false so the build doesn't stop when a warning is encountered.
