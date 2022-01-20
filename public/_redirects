@@ -1,0 +1,4 @@
+
+/api/get-apod /.netlify/functions/get-apod 200
+/* /index.html 200
+

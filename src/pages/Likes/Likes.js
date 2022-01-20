@@ -32,7 +32,7 @@ const Likes = () => {
 			//Reverse the array so that the most recent entry is first
 			setCards(cardArr.reverse());
 		} else {
-			setCards([<h3>Like a post to see it here</h3>]);
+			setCards([]);
 			setIsLoading(false);
 		}
 	}, []);
@@ -56,7 +56,7 @@ const Likes = () => {
 					<CircularProgress />
 				</Box>
 			) : null}
-			<ThumbnailGrid cards={cards} />
+			{cards.length > 0 ? <ThumbnailGrid cards={cards} /> : <h3>Like a post to see it here</h3>}
 		</div>
 	);
 };
