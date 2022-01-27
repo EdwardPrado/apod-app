@@ -2,7 +2,7 @@
 
 The purpose of this project was to build an app to help share photos from any of NASA's image APIs. I chose the [Astronomy Picture of the Day (APOD) API](https://github.com/nasa/apod-api) for this project.
 
-Live version is [here](https://ep-shopify-challenge.netlify.app/).
+### Live version is [here](https://app-apod.netlify.app/).
 
 # Features
 
